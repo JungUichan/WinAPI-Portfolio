@@ -1,0 +1,13 @@
+#pragma once
+#include "Math.h"
+#include "Vector2.h"
+#include "Figure.h"
+#include "Image.h"
+#include "Window.h"
+#include "Input.h"
+#include "Time.h"
+#include "Camera.h"
+#include "D2DRenderer.h"
+#include "ImageManager.h"
+#include "ObjectManager.h"
+#include "SceneManager.h"

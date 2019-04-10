@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{2d0e87db-6fa1-4872-a4e6-526406aa2d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainEntry">
+      <UniqueIdentifier>{ede14813-a6b8-4776-bfb7-ca96cab35043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainHeaderCpp">
+      <UniqueIdentifier>{bf557960-7737-48b6-b1d7-75ce173363a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Util">
+      <UniqueIdentifier>{1a1765d1-e3fe-4b60-95ea-34b39d5e9b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager">
+      <UniqueIdentifier>{e55cf351-257c-4e07-9707-310b4905c37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager\CameraManager">
+      <UniqueIdentifier>{170392da-bff3-4a84-92d7-8e58271b7dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager\ImageManager">
+      <UniqueIdentifier>{39ac0e62-3956-43a0-80fc-af687dd9272d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager\ObjectManager">
+      <UniqueIdentifier>{bbdd04d2-238a-4570-bb9e-12a83b6cb212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager\TimaManager">
+      <UniqueIdentifier>{a77ebcb4-c721-447c-a8bb-e0b96ae5d1f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\GameObject">
+      <UniqueIdentifier>{8e8176c5-02ac-4b97-a6a5-cc6bf688acab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Input">
+      <UniqueIdentifier>{37eca566-ed89-4b55-b7fd-b139bb31deba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Image">
+      <UniqueIdentifier>{f1091ee6-b096-4848-a76a-b941d867521d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Singleton">
+      <UniqueIdentifier>{f87cc17d-c948-4758-96e6-fdd288f76dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Window">
+      <UniqueIdentifier>{c235849b-5c07-48c6-8e61-fc3995d2a998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Animation">
+      <UniqueIdentifier>{1b14e450-4169-4a64-845f-22d55906994e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainEntry\Scene">
+      <UniqueIdentifier>{2835ba55-d20d-4c0b-b94a-ba1b5c64b2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainEntry\Scene\Test">
+      <UniqueIdentifier>{5a8e24d1-843c-404d-846b-012df1cd385b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Image\D2DRender">
+      <UniqueIdentifier>{f16d3e81-095f-4014-a5b9-f0a3d1a40515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainEntry\SceneInit">
+      <UniqueIdentifier>{5a7ba555-766f-4ac6-bf50-0e3ad2be81e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainEntry\Scene\LoadingScene">
+      <UniqueIdentifier>{78adae75-ab9a-4b60-8cb0-beb63cdee71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Player">
+      <UniqueIdentifier>{72d01747-f7e0-4917-b583-0b27c8106132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Manager\SceneManager">
+      <UniqueIdentifier>{dd3d786d-bee5-40f7-8266-88d44b327f45}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>MainHeaderCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="ChanFrameWork.h">
+      <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DefineHeader.h">
+      <Filter>MainHeaderCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumStructHeader.h">
+      <Filter>MainHeaderCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>MainHeaderCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleHeader.h">
+      <Filter>MainHeaderCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="Figure.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatEllipse.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatRect.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>System\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h">
+      <Filter>MainEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>System\Manager\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DRenderer.h">
+      <Filter>System\Image\D2DRender</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>System\Manager\ImageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>System\Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>System\Manager\TimaManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>System\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>System\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Singletonbase.h">
+      <Filter>System\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>System\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>System\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h">
+      <Filter>System\Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>System\Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>MainEntry\Scene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScene.h">
+      <Filter>MainEntry\Scene\LoadingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>System\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ChanFrameWork.cpp">
+      <Filter>MainHeaderCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>MainEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="Figure.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatEllipse.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatRect.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>System\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>System\Manager\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer + DrawFunc.cpp">
+      <Filter>System\Image\D2DRender</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer.cpp">
+      <Filter>System\Image\D2DRender</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>System\Manager\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>System\Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>System\Manager\TimaManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>System\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>System\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>System\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>System\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>System\Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>System\Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>MainEntry\Scene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneInit.cpp">
+      <Filter>MainEntry\SceneInit</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScene.cpp">
+      <Filter>MainEntry\Scene\LoadingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>System\Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChanFrameWork.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="ChanFrameWork.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
