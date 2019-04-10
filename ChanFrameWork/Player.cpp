@@ -24,11 +24,10 @@ Player::Player(Vector2 pos)
 	this->CreateAnimation();
 	this->ChangeAnimation(PlayerState::Down_Idle);
 
-	this->_dashMode = false;
-	this->_atkMode = false;
-
 	this->_moveSpeed = MoveSpeed;
 	this->_dashSpeed = 1100.0f;
+	
+	this->_movePower = Vector2(0.f, 0.f);
 }
 
 Player::~Player()
@@ -51,9 +50,24 @@ void Player::Release()
 
 void Player::Update()
 {
-	MoveControl();
+	//대각선 이동 시 속도 보정
+	//if ((_Input->GetKey('A') && _Input->GetKey('W')) || (_Input->GetKey('A') && _Input->GetKey('S'))
+	//	|| (_Input->GetKey('D') && _Input->GetKey('W')) || (_Input->GetKey('D') && _Input->GetKey('S')))
+	//{
+	//	cout << "revise" << endl;
+	//	_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) + (_moveSpeed * _moveSpeed));
+	//}
+	//else
+	//{
+	//	_moveSpeed = MoveSpeed;
+	//}
+
+	//초기화 해줘서 값 누적 방지
+	_movePower = Vector2(0, 0);
+	
 
 	this->UpdateState();
+	this->MoveRevise(_movePower);	//이동 보정 값 (대각선 보정 값 적용을 위해)
 	this->UpdateMainRect();
 	this->_playerAnimation->UpdateFrame();
 }
@@ -222,6 +236,7 @@ void Player::UpdateState()
 	{
 	case Player::PlayerState::Left_Idle:
 		//아이들 상태에서 행동 처리 @@ 이동 조작 @@ 공격 @@
+		_movePower += Vector2(0.f, 0.f);
 		if (_Input->GetKey('A')) { ChangeState(PlayerState::Left_Run); }
 		else if (_Input->GetKey('D')) { ChangeState(PlayerState::Right_Run); }
 		else if (_Input->GetKey('W')) { ChangeState(PlayerState::Up_Run); }
@@ -229,6 +244,7 @@ void Player::UpdateState()
 		else if (_Input->GetKeyDown('J')){ ChangeState(PlayerState::Left_Atk); }
 		break;
 	case Player::PlayerState::Right_Idle:
+		_movePower += Vector2(0.f, 0.f);
 		//아이들 상태에서 행동 처리 @@ 이동 조작 @@ 공격 @@
 		if (_Input->GetKey('A')) { ChangeState(PlayerState::Left_Run); }
 		else if (_Input->GetKey('D')) { ChangeState(PlayerState::Right_Run); }
@@ -237,6 +253,7 @@ void Player::UpdateState()
 		else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Right_Atk); }
 		break;
 	case Player::PlayerState::Up_Idle:
+		_movePower += Vector2(0.f, 0.f);
 		//아이들 상태에서 행동 처리 @@ 이동 조작 @@ 공격 @@
 		if (_Input->GetKey('A')) { ChangeState(PlayerState::Left_Run); }
 		else if (_Input->GetKey('D')) { ChangeState(PlayerState::Right_Run); }
@@ -245,6 +262,7 @@ void Player::UpdateState()
 		else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		break;
 	case Player::PlayerState::Down_Idle:
+		_movePower += Vector2(0.f, 0.f);
 		//아이들 상태에서 행동 처리 @@ 이동 조작 @@ 공격 @@
 		if (_Input->GetKey('A')) { ChangeState(PlayerState::Left_Run); }
 		else if (_Input->GetKey('D')) { ChangeState(PlayerState::Right_Run); }
@@ -255,14 +273,13 @@ void Player::UpdateState()
 	//이동
 	case Player::PlayerState::Left_Run:
 		//이동 상태에서 행동 처리 @@ 공격 @@ 대쉬 @@
-		_position.x -= _moveSpeed * _TimeManager->DeltaTime();
+		_movePower += Vector2(-1.f, 0.f);
 		if (_Input->GetKeyUp('A')) { ChangeState(PlayerState::Left_Idle); cout << "왼쪽 이동" << endl; }
 		else if (_Input->GetKeyDown('W')) { ChangeAnimation(PlayerState::Up_Run); }
 		else if (_Input->GetKey('W')) 
 		{
 			cout << "대각선 이동" << endl;
-			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
-			_position.y -= _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(0.f, -1.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Up_Dash); }
 			else if(_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
@@ -270,7 +287,7 @@ void Player::UpdateState()
 		else if (_Input->GetKey('S')) 
 		{
 			cout << "대각선 이동" << endl;
-			_position.y += _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(0.f, 1.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Down_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
@@ -283,14 +300,13 @@ void Player::UpdateState()
 		break;
 	case Player::PlayerState::Right_Run:
 		//이동 상태에서 행동 처리 @@ 공격 @@ 대쉬 @@
-		_position.x += _moveSpeed * _TimeManager->DeltaTime();
+		_movePower += Vector2(1.f, 0.f);
 		if (_Input->GetKeyUp('D')){ ChangeState(PlayerState::Right_Idle); cout << "오른쪽 이동" << endl;	}
 		else if (_Input->GetKeyDown('W')) { ChangeAnimation(PlayerState::Up_Run); }
 		else if (_Input->GetKey('W'))
 		{
 			cout << "대각선 이동" << endl;
-			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
-			_position.y -= _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(0.f, -1.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Up_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
@@ -298,27 +314,26 @@ void Player::UpdateState()
 		else if (_Input->GetKey('S'))
 		{
 			cout << "대각선 이동" << endl;
-			_position.y += _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(0.f, 1.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Down_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
 		else if (_Input->GetKeyUp('W')) { ChangeAnimation(PlayerState::Right_Run); }
 		else if (_Input->GetKeyUp('S')) { ChangeAnimation(PlayerState::Right_Run); }
 
-		else if (_Input->GetKeyDown('J')) { _atkMode = true; ChangeState(PlayerState::Right_Atk); }
+		else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Right_Atk); }
 		else if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Right_Dash); }
 		this->UpdateMainRect();
 		break;
 	case Player::PlayerState::Up_Run:
 		//이동 상태에서 행동 처리 @@ 공격 @@ 대쉬 @@
-		_position.y -= _moveSpeed * _TimeManager->DeltaTime();
+		_movePower += Vector2(0.f, -1.f);
 		if (_Input->GetKeyUp('W')) { ChangeState(PlayerState::Up_Idle); cout << "위쪽 이동" << endl;	}
 		else if (_Input->GetKeyDown('A')) { ChangeAnimation(PlayerState::Left_Run); }
 		else if (_Input->GetKey('A'))
 		{
 			cout << "대각선 이동" << endl;
-			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
-			_position.x -= _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(-1.f, 0.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Left_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 
@@ -327,7 +342,7 @@ void Player::UpdateState()
 		else if (_Input->GetKey('D'))
 		{
 			cout << "대각선 이동" << endl;
-			_position.x += _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(1.f, 0.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Right_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
@@ -340,14 +355,13 @@ void Player::UpdateState()
 		break;
 	case Player::PlayerState::Down_Run:
 		//이동 상태에서 행동 처리 @@ 공격 @@ 대쉬 @@
-		_position.y += _moveSpeed * _TimeManager->DeltaTime();
+		_movePower += Vector2(0.f, 1.f);
 		if (_Input->GetKeyUp('S')) { ChangeState(PlayerState::Down_Idle); cout << "아래쪽 이동" << endl;	}
 		else if(_Input->GetKeyDown('A')){ ChangeAnimation(PlayerState::Left_Run); }
 		else if (_Input->GetKey('A'))
 		{
 			cout << "대각선 이동" << endl;
-			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
-			_position.x -= _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(-1.f, 0.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Left_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 			
@@ -356,7 +370,7 @@ void Player::UpdateState()
 		else if (_Input->GetKey('D'))
 		{
 			cout << "대각선 이동" << endl;
-			_position.x += _moveSpeed * _TimeManager->DeltaTime();
+			_movePower += Vector2(1.f, 0.f);
 			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Right_Dash); }
 			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
@@ -481,6 +495,7 @@ void Player::UpdateState()
 	default:
 		break;
 	}
+	
 }
 /******************************************************
 ## ChangeAnimation ##
@@ -616,20 +631,16 @@ void Player::CreateAnimation()
 
 /******************************************************
 ## MoveControl ##
-@@ 플레이어 이동 관리
+@@ 대각선 이동 보정 - 단위 벡터 활용
 *******************************************************/
-void Player::MoveControl()
+void Player::MoveRevise(Vector2 movePower)
 {
+	//이동하지 않았다면 Float_EQUAL에 소수점 오차값으로 확인하여 이동을 하지 않았다면 return으로 빠져나간다.
+	if (FLOAT_EQUAL(movePower.x, 0.f) && FLOAT_EQUAL(movePower.y, 0.f)) return;
 
-	//대각선 이동 시 속도 보정
-	//if ((_Input->GetKey('A') && _Input->GetKey('W')) || (_Input->GetKey('A') && _Input->GetKey('S'))
-	//	|| (_Input->GetKey('D') && _Input->GetKey('W')) || (_Input->GetKey('D') && _Input->GetKey('S')))
-	//{
-	//	cout << "revise" << endl;
-	//	_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
-	//}
-	//else
-	//{
-	//	_moveSpeed = MoveSpeed;
-	//}
+	//이동속도 보정 x, y
+	this->_position += Vector2::Normalize(&movePower) * _moveSpeed * _TimeManager->DeltaTime();
+
+
+	this->UpdateMainRect();
 }

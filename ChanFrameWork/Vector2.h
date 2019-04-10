@@ -28,6 +28,8 @@ public:
 	const bool operator!=(const Vector2& v);
 public:
 	static Vector2 Normalize(const Vector2* const  pVector2);
+	static float NormalizeX(const float* const f1, const float* const f2);
+	static float NormalizeY(const float* const f1, const float* const f2);
 	static float ToRadian(const Vector2* const pVector2);
 	static float Length(const Vector2* const pVector2);
 	static float Dot(const Vector2* const pVector2A, const Vector2* const pVector2B);

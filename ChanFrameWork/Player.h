@@ -41,8 +41,7 @@ private:
 
 	float _moveSpeed;								//플레이어 이동 속도
 
-	bool _dashMode;									//대쉬 상태인 경우 조작을 막기위한 bool
-	bool _atkMode;									//공격 상태인 경우 조작을 막기위한 bool
+	Vector2 _movePower;								//움직이는 힘 x,y
 
 public:
 	Player(Vector2 pos);	//플레이어 생성할 좌표용
@@ -63,7 +62,7 @@ public:
 	//상태에 따른 애니메이션 생성
 	void CreateAnimation();
 
-	//이동 관리
-	void MoveControl();
+	//이동 보정 (대각선 단위 벡터)
+	void MoveRevise(Vector2 movePower);
 };
 

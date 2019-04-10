@@ -118,6 +118,29 @@ Vector2 Vector2::Normalize(const Vector2 * const pVector2)
 
 	return result;
 }
+float Vector2::NormalizeX(const float * const f1, const float * const f2)
+{
+	float resultX = *f1;
+	float resultY = *f2;
+
+	float length = sqrt(resultX * resultX + resultY * resultY);
+	
+	resultX /= length;
+
+	return resultX;
+
+}
+float Vector2::NormalizeY(const float * const f1, const float * const f2)
+{
+	float resultX = *f1;
+	float resultY = *f2;
+
+	float length = sqrt(resultX * resultX + resultY * resultY);
+
+	resultY /= length;
+
+	return resultY;
+}
 /****************************************************************************************************
 ## static ToRadian ##
 @@ Vector2* pVector2 : 라디안으로 변환할 벡터
