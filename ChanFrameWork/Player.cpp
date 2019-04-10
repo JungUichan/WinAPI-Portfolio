@@ -263,17 +263,21 @@ void Player::UpdateState()
 			cout << "대각선 이동" << endl;
 			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
 			_position.y -= _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Up_Dash); }
+			else if(_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
 		else if (_Input->GetKeyDown('S')) { ChangeAnimation(PlayerState::Down_Run); }
 		else if (_Input->GetKey('S')) 
 		{
 			cout << "대각선 이동" << endl;
 			_position.y += _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Down_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
 		else if (_Input->GetKeyUp('S')) { ChangeAnimation(PlayerState::Left_Run); }
 		else if (_Input->GetKeyUp('W')) { ChangeAnimation(PlayerState::Left_Run); }
 		
-		else if (_Input->GetKeyDown('J')) { _atkMode = true; ChangeState(PlayerState::Left_Atk); }
+		else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Left_Atk); }
 		else if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Left_Dash); }
 		this->UpdateMainRect();
 		break;
@@ -287,12 +291,16 @@ void Player::UpdateState()
 			cout << "대각선 이동" << endl;
 			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
 			_position.y -= _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Up_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
 		else if (_Input->GetKeyDown('S')) { ChangeAnimation(PlayerState::Down_Run); }
 		else if (_Input->GetKey('S'))
 		{
 			cout << "대각선 이동" << endl;
 			_position.y += _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Down_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
 		else if (_Input->GetKeyUp('W')) { ChangeAnimation(PlayerState::Right_Run); }
 		else if (_Input->GetKeyUp('S')) { ChangeAnimation(PlayerState::Right_Run); }
@@ -311,17 +319,22 @@ void Player::UpdateState()
 			cout << "대각선 이동" << endl;
 			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
 			_position.x -= _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Left_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
+
 		}
 		else if (_Input->GetKeyDown('D')) { ChangeAnimation(PlayerState::Right_Run); }
 		else if (_Input->GetKey('D'))
 		{
 			cout << "대각선 이동" << endl;
 			_position.x += _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Right_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		}
 		else if (_Input->GetKeyUp('A')) { ChangeAnimation(PlayerState::Up_Run); }
 		else if (_Input->GetKeyUp('D')) { ChangeAnimation(PlayerState::Up_Run); }
 
-		else if (_Input->GetKeyDown('J')) { _atkMode = true; ChangeState(PlayerState::Up_Atk); }
+		else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Up_Atk); }
 		else if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Up_Dash); }
 		this->UpdateMainRect();
 		break;
@@ -335,6 +348,8 @@ void Player::UpdateState()
 			cout << "대각선 이동" << endl;
 			//_moveSpeed = sqrtf((_moveSpeed * _moveSpeed) / 2);
 			_position.x -= _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Left_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 			
 		}
 		else if(_Input->GetKeyDown('D')){ ChangeAnimation(PlayerState::Right_Run); }
@@ -342,6 +357,8 @@ void Player::UpdateState()
 		{
 			cout << "대각선 이동" << endl;
 			_position.x += _moveSpeed * _TimeManager->DeltaTime();
+			if (_Input->GetKeyDown(VK_SPACE)) { ChangeState(PlayerState::Right_Dash); }
+			else if (_Input->GetKeyDown('J')) { ChangeState(PlayerState::Down_Atk); }
 		}
 		else if (_Input->GetKeyUp('A')) { ChangeAnimation(PlayerState::Down_Run); }
 		else if (_Input->GetKeyUp('D')) { ChangeAnimation(PlayerState::Down_Run); }
@@ -373,7 +390,6 @@ void Player::UpdateState()
 		{
 			_dashSpeed = 1100.0f;
 			_stateCount = 0;
-			_dashMode = false;
 			ChangeState(PlayerState::Left_Idle);
 		}
 		this->UpdateMainRect();
@@ -398,7 +414,6 @@ void Player::UpdateState()
 		{
 			_dashSpeed = 1100.0f;
 			_stateCount = 0;
-			_dashMode = false;
 			ChangeState(PlayerState::Right_Idle);
 		}
 		this->UpdateMainRect();
@@ -423,7 +438,6 @@ void Player::UpdateState()
 		{
 			_dashSpeed = 1100.0f;
 			_stateCount = 0;
-			_dashMode = false;
 			ChangeState(PlayerState::Up_Idle);
 		}
 		this->UpdateMainRect();
@@ -448,11 +462,11 @@ void Player::UpdateState()
 		{
 			_dashSpeed = 1100.0f;
 			_stateCount = 0;
-			_dashMode = false;
 			ChangeState(PlayerState::Down_Idle);
 		}
 		this->UpdateMainRect();
 		break;
+
 	//공격
 	case Player::PlayerState::Left_Atk:
 		break;
@@ -568,8 +582,7 @@ void Player::CreateAnimation()
 	downDash->SetIsLoop(true);
 	downDash->SetFrameUpdateTime(DashTime);
 	_aniList.insert(make_pair(PlayerState::Down_Dash, downDash));
-
-
+	
 	//왼쪽 공격
 	Animation* leftAtk = new Animation;
 	leftAtk->SetStartEndFrame(0, 9, 3, 9, false);
